@@ -1,20 +1,26 @@
 class WeightData {
-  final String label;
-  final String price;
+  int? id;
+  String? name;
+  double? price;
+  int? points;
+  int? priceBeforeDiscount;
+  int? numberOfSalad;
 
-  WeightData({required this.label, required this.price});
-  
-  factory WeightData.fromMap(Map<String, dynamic> json) {
-    return WeightData(
-      label: json['label'],
-      price: json['price'],
-    );
+  WeightData(
+      {this.id,
+      this.name,
+      this.price,
+      this.points,
+      this.priceBeforeDiscount,
+      this.numberOfSalad});
+
+  WeightData.fromJson({required Map<String, dynamic> json}) {
+    id = json['id'];
+    name = json['name'];
+    price = double.tryParse(json['price'].toString());
+    points = json['points'];
+    priceBeforeDiscount = json['price_before_discount'];
+    numberOfSalad = json['number_of_salad'];
   }
-  
-  Map<String, dynamic> toMap() {
-    return {
-      'label': label,
-      'price': price,
-    };
-  }
+
 }

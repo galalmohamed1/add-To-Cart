@@ -41,8 +41,8 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
               child: DecoratedBox(decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
-                  image: AssetImage(
-                    widget.add.image,
+                  image: NetworkImage(
+                    widget.add.image ?? '',
                     ),
                   fit: BoxFit.cover,
                 ),
@@ -56,69 +56,67 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(
-                  widget.add.name,
+                  widget.add.name??"",
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
-                Expanded(
-                  child: Row(
-                    children:[
-                      Text(
-                        widget.add.price,
-                        style: TextStyle(fontSize: 14, color: Colors.black),
+                Row(
+                  children:[
+                    Text(
+                      (widget.add.price??"0").toString(),
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+                    SizedBox(width: 109,),
+                    Container(
+                      width: 112,
+                      height: 34,
+                      // color: Colors.amber,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 34,
+                            height: 34,
+                            decoration: BoxDecoration(
+                              color: ColorsApp.primaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.remove, color: Colors.white,size: 16,),
+                              onPressed: () {
+                                setState(() {
+                                  if (count > 0) {
+                                    count--;
+                                  }
+                                });
+                              },
+                            ),
+                          ),
+                          Spacer(),
+                          Text(
+                            count.toString(),
+                            style: TextStyle(fontSize: 16, color: Colors.black),
+                          ),
+                           Spacer(),
+                          Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: ColorsApp.primaryColor,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: IconButton(
+                              icon: Icon(Icons.add, color: Colors.white,size: 16,),
+                              onPressed: () {
+                                setState(() {
+                                  count++;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(width: 109,),
-                      Container(
-                        width: 112,
-                        height: 34,
-                        // color: Colors.amber,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 34,
-                              height: 34,
-                              decoration: BoxDecoration(
-                                color: ColorsApp.primaryColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.remove, color: Colors.white,size: 16,),
-                                onPressed: () {
-                                  setState(() {
-                                    if (count > 0) {
-                                      count--;
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                            Spacer(),
-                            Text(
-                              count.toString(),
-                              style: TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                             Spacer(),
-                            Container(
-                              width: 32,
-                              height: 32,
-                              decoration: BoxDecoration(
-                                color: ColorsApp.primaryColor,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.add, color: Colors.white,size: 16,),
-                                onPressed: () {
-                                  setState(() {
-                                    count++;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                      
-                      ],
-                  ),
+                    )
+                    
+                    ],
                 ),
                 
                 ],

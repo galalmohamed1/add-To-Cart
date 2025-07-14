@@ -6,7 +6,7 @@ import 'package:add_to_cart/features/category/view/shopping/widget/shpping_cart_
 import 'package:add_to_cart/features/category/widget/main_text_field.dart';
 import 'package:add_to_cart/main.dart';
 import 'package:flutter/material.dart';
-import 'package:add_to_cart/features/category/widget/bottomsheet.dart';
+import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dart';
 
 class ShoppingScreen extends StatefulWidget {
   const ShoppingScreen({super.key});

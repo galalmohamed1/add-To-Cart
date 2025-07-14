@@ -3,8 +3,8 @@ import 'package:add_to_cart/features/category/data/extras_data_model.dart';
 import 'package:flutter/material.dart';
 
 class ExtrasScreen extends StatefulWidget {
-  final ExtrasDataModel dataModel;
-  const ExtrasScreen({super.key, required this.dataModel,});
+  final ExtrasDataModel extras;
+  const ExtrasScreen({super.key, required this.extras,});
 
   @override
   State<ExtrasScreen> createState() => _ExtrasScreenState();
@@ -34,7 +34,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
             child: Text(
-              widget.dataModel.name,
+              widget.extras.name??"",
               // "Sesame Paste Salad",
             style: TextStyle(
               fontSize: 12,
@@ -44,7 +44,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
           ),
           const Spacer(),
           Text(
-            widget.dataModel.price,
+            (widget.extras.price??"0").toString(),
             // "10 EGP",
           style: TextStyle(
             color: Colors.black,
@@ -56,11 +56,11 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
           GestureDetector(
             onTap: () {
               setState(() {
-                widget.dataModel.check=!widget.dataModel.check;
+                widget.extras.check=!widget.extras.check;
               });
             },
             child: SizedBox(
-              child:widget.dataModel.check?Container(
+              child:widget.extras.check?Container(
                 width: 25,
                 height: 25,
                 decoration: BoxDecoration(

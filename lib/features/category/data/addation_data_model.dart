@@ -1,25 +1,15 @@
 class AddationDataModel {
-  final String image;
-  final String name;
-  final String price;
+  int? id;
+  String? name;
+  double? price;
+  String? image;
 
-  AddationDataModel({
-    required this.image,
-    required this.name,
-    required this.price,
-  });
-  factory AddationDataModel.fromJson(Map<String, dynamic> json) {
-    return AddationDataModel(
-      image: json['image'],
-      name: json['name'],
-      price: json['price'],
-    );
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'image': image,
-      'name': name,
-      'price': price,
-    };
+  AddationDataModel({this.id, this.name, this.price, this.image});
+
+  AddationDataModel.fromJson({required Map<String, dynamic> json}) {
+    id = json['id'];
+    name = json['name'];
+    price = double.tryParse(json['price'].toString());
+    image = json['image'];
   }
 }

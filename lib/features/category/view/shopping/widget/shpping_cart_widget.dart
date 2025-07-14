@@ -1,12 +1,13 @@
 import 'package:add_to_cart/core/assets.dart';
 import 'package:add_to_cart/core/color/colors.dart';
+import 'package:add_to_cart/features/category/data/cart_item_data.dart';
 import 'package:add_to_cart/features/category/data/product_data_model.dart';
 import 'package:add_to_cart/features/category/view/shopping/widget/bottom_sheet_chat_message.dart';
-import 'package:add_to_cart/features/category/widget/bottomsheet.dart';
+import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dart';
 import 'package:flutter/material.dart';
 
 class ShppingCartWidget extends StatefulWidget {
-  final ProductDataModel? prodect; 
+  final CartItem? prodect; 
   const ShppingCartWidget({super.key,  this.prodect,});
 
   @override
@@ -45,7 +46,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
-                        image: AssetImage(Assets.assetsImagesProductImage),
+                        image: NetworkImage(widget.prodect?.product.image ?? ''),
                         fit: BoxFit.cover,
                         )
                   )),
@@ -53,13 +54,18 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 25.0,horizontal: 15),
-                child: Container(
-                  height: 24,
-                  width: 24,
-                  decoration: BoxDecoration(
-                    image:DecorationImage(image: AssetImage(Assets.assetsDelete)) ,
+                child: GestureDetector(
+                  onTap: () {
+                    
+                  },
+                  child: Container(
+                    height: 24,
+                    width: 24,
+                    decoration: BoxDecoration(
+                      image:DecorationImage(image: AssetImage(Assets.assetsDelete)) ,
+                    ),
+                    
                   ),
-                  
                 ),
               ),
             ],
@@ -72,7 +78,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
               children: [
                 SizedBox(height: 16,),
                 Text(
-                  "Grilled Steak, with Boiled\nBasmati Rice And Salad",
+                  widget.prodect?.product.name ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
@@ -91,7 +97,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                     ),
                     SizedBox(width: 5,),
                     Text(
-                      "1 Kilo",
+                      widget.prodect?.weight?.name?? '',
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -111,7 +117,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                     ),
                     SizedBox(width: 5,),
                     Text(
-                      "8 items",
+                      (widget.prodect?.additions).toString(),
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -154,7 +160,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                       ),
                       SizedBox(width: 20,),
                       SizedBox(
-                        width: 100,
+                        width: 85,
                         height: 32,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -261,7 +267,7 @@ void _showButtonPressedChatMessage(BuildContext context) {
   );
 }
 
-void _showButtonPressed(BuildContext context,ProductDataModel argument,int index) {
+void _showButtonPressed(BuildContext context,ProductModel argument,int index) {
   showModalBottomSheet(
     backgroundColor: ColorsApp.white,
     context: context,

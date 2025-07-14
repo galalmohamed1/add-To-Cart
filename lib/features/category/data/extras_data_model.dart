@@ -1,28 +1,19 @@
 class ExtrasDataModel {
-  final String name;
-  final String price;
-  bool check;
+  int? id;
+  String? name;
+  double? price;
+  bool check=false;
 
-  ExtrasDataModel({
-    required this.name,
-    required this.price,
-    this.check =true,
-  });
+  ExtrasDataModel({this.id, this.name, this.price, this.check = false});
 
 
-  factory ExtrasDataModel.fromJson(Map<String, dynamic> json) {
+  factory ExtrasDataModel.fromJson({required Map<String, dynamic> json}) {
     return ExtrasDataModel(
+      id: json['id'],
       name: json['name'],
-      price: json['price'],
-      check: json['check'],
+      price: double.tryParse(json['price'].toString()),
+      
     );
   } 
 
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'price': price,
-      'check':check,
-    };
-  }
 }
