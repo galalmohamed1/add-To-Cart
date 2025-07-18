@@ -5,6 +5,7 @@ class WeightData {
   int? points;
   int? priceBeforeDiscount;
   int? numberOfSalad;
+  bool check=false;
 
   WeightData(
       {this.id,
@@ -12,7 +13,9 @@ class WeightData {
       this.price,
       this.points,
       this.priceBeforeDiscount,
-      this.numberOfSalad});
+      this.numberOfSalad,
+      this.check=false,
+      });
 
   WeightData.fromJson({required Map<String, dynamic> json}) {
     id = json['id'];

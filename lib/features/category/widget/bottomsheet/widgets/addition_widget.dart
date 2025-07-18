@@ -1,11 +1,7 @@
 import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/addation_data_model.dart';
-import 'package:add_to_cart/features/category/logic/home_cubit.dart';
-import 'package:add_to_cart/features/category/logic/home_state.dart';
 import 'package:add_to_cart/features/category/view/widget/addaition_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AdditionWidget extends StatelessWidget {
   final List<AddationDataModel>salads;
@@ -25,8 +21,8 @@ class AdditionWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   "Addition ( select 8):",
                   style: TextStyle(
@@ -37,7 +33,7 @@ class AdditionWidget extends StatelessWidget {
                 ),
               ),
                ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemCount: salads.length,
                       // padding: const EdgeInsets.symmetric(horizontal: 8.0),

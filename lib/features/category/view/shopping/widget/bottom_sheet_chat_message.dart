@@ -26,7 +26,7 @@ class BottomSheetChatMessage extends StatelessWidget {
                   color: ColorsApp.lightGrey,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: [
-                    BoxShadow(
+                    const BoxShadow(
                       color: ColorsApp.black,
                       blurRadius: 4,
                       offset: Offset(0, 4),
@@ -37,7 +37,7 @@ class BottomSheetChatMessage extends StatelessWidget {
                   controller: _noteController,
                   maxLines: 4,
                   textAlign: TextAlign.start,
-                  decoration: InputDecoration(border: InputBorder.none,),
+                  decoration: const InputDecoration(border: InputBorder.none,),
                 ),
               ),
               const SizedBox(height: 20),

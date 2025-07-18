@@ -1,18 +1,11 @@
 import 'package:add_to_cart/features/category/data/product_data_model.dart';
 import 'package:add_to_cart/core/color/colors.dart';
-import 'package:add_to_cart/features/category/logic/home_cubit.dart';
-import 'package:add_to_cart/features/category/view/widget/addaition_data.dart';
-import 'package:add_to_cart/features/category/data/weight_data.dart';
-import 'package:add_to_cart/features/category/data/addation_data_model.dart';
-import 'package:add_to_cart/features/category/data/extras_data_model.dart';
-import 'package:add_to_cart/features/category/data/cart_item_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductScreen extends StatefulWidget {
-  late  bool isFav ;
+  late bool isFav;
   final ProductModel productData;
-   ProductScreen({super.key, required this.productData, required this.isFav});
+  ProductScreen({super.key, required this.productData, required this.isFav});
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -32,7 +25,7 @@ class _ProductScreenState extends State<ProductScreen> {
             color: ColorsApp.black.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -45,7 +38,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 width: double.infinity,
                 height: 119,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(12),
                     topRight: Radius.circular(12),
                   ),
@@ -60,15 +53,15 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: IconButton(
                   onPressed: () {
                     setState(() {
-                      widget.isFav= !widget.isFav;
+                      widget.isFav = !widget.isFav;
                     });
                   },
                   icon: widget.isFav
-                      ? Icon(
-                        Icons.favorite,
-                        color: ColorsApp.primaryColor,
+                      ? const Icon(
+                          Icons.favorite,
+                          color: ColorsApp.primaryColor,
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.favorite_border_outlined,
                           color: ColorsApp.primaryColor,
                         ),
@@ -76,7 +69,7 @@ class _ProductScreenState extends State<ProductScreen> {
               ),
             ],
           ),
-          SizedBox(height: 7),
+          const SizedBox(height: 7),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: Column(
@@ -84,7 +77,7 @@ class _ProductScreenState extends State<ProductScreen> {
               children: [
                 Text(
                   widget.productData.name ?? "",
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: ColorsApp.black,
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
@@ -93,7 +86,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 Text(
                   widget.productData.description ?? "",
                   maxLines: 1,
-                  style: TextStyle(
+                  style: const TextStyle(
                     overflow: TextOverflow.ellipsis,
                     color: ColorsApp.black,
                     fontSize: 13,
@@ -103,7 +96,7 @@ class _ProductScreenState extends State<ProductScreen> {
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Stack(
             clipBehavior: Clip.none,
             children: [
@@ -112,7 +105,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 height: 33,
                 decoration: BoxDecoration(
                   color: ColorsApp.white,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(12),
                     bottomRight: Radius.circular(12),
                   ),
@@ -121,7 +114,7 @@ class _ProductScreenState extends State<ProductScreen> {
                       color: ColorsApp.black.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 15,
-                      offset: Offset(0, -5),
+                      offset: const Offset(0, -5),
                     ),
                   ],
                 ),
@@ -129,7 +122,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     (widget.productData.price ?? 0).toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: ColorsApp.primaryColor,
                       fontSize: 14,
                     ),
@@ -140,8 +133,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 right: 11,
                 bottom: 14,
                 child: GestureDetector(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   child: Container(
                     width: 28,
                     height: 28,
@@ -149,7 +141,11 @@ class _ProductScreenState extends State<ProductScreen> {
                       borderRadius: BorderRadius.circular(10),
                       color: ColorsApp.primaryColor,
                     ),
-                    child: Icon(Icons.add, color: ColorsApp.white, size: 16),
+                    child: const Icon(
+                      Icons.add,
+                      color: ColorsApp.white,
+                      size: 16,
+                    ),
                   ),
                 ),
               ),

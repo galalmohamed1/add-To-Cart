@@ -36,7 +36,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
             child: Text(
               widget.extras.name??"",
               // "Sesame Paste Salad",
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
               color: Colors.black,
@@ -46,13 +46,13 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
           Text(
             (widget.extras.price??"0").toString(),
             // "10 EGP",
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 12,
             fontWeight: FontWeight.w700,
           ),
           ),
-          SizedBox(width: 5,),
+          const SizedBox(width: 5,),
           GestureDetector(
             onTap: () {
               setState(() {
@@ -72,7 +72,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
                     width:1.5,
                     ),
                 ),
-                child: Icon(Icons.check,color: ColorsApp.white,),
+                child: const Icon(Icons.check,color: ColorsApp.white,),
               ):Container(
                 width: 25,
                 height: 25,
@@ -87,7 +87,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
               )
             ),
           ),
-          SizedBox(width: 5,),
+          const SizedBox(width: 5,),
       ],
       ),
     );

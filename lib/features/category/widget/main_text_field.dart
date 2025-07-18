@@ -113,10 +113,10 @@ class _MainTextFieldState extends State<MainTextField> {
               },
               minLines: widget.minLines,
               maxLines: widget.maxLines,
-              cursorColor: Color(0xFF89804A),
+              cursorColor: const Color(0xFF89804A),
               controller: widget.controller,
               enabled: widget.enabled,
-              style: !widget.enabled ? TextStyle(
+              style: !widget.enabled ? const TextStyle(
                 fontSize: 14,
                 // fontWeight: semi,
                 color: Color(0xFFAEAEAE),
@@ -192,7 +192,7 @@ class _MainTextFieldState extends State<MainTextField> {
       return InkWell(
         onTap: () => isObscure.value = !value,
         canRequestFocus: false,
-        child: Icon(value ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill, color: Color(0xFFB9B9B9), ),
+        child: Icon(value ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill, color: const Color(0xFFB9B9B9), ),
       );
     }
     return null;

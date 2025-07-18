@@ -63,11 +63,11 @@ class MainButton extends StatelessWidget {
                   onPressed: enable ? ontap : null,
                   minWidth: padding != null ? null : width ?? 40,
                   height: 0,
-                  disabledColor: Color(0xffFE962D).withAlpha(10),
+                  disabledColor: const Color(0xffFE962D).withAlpha(10),
                   padding: padding ?? const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                   color: !enable ? Colors.black12 : bgColor,
                   shape: RoundedRectangleBorder(
-                    side: showBorder ? BorderSide(color: borderColor ?? style.color ??Color(0xffFE962D)) : BorderSide.none,
+                    side: showBorder ? BorderSide(color: borderColor ?? style.color ??const Color(0xffFE962D)) : BorderSide.none,
                     borderRadius: BorderRadius.circular(borderRadius),
                   ),
                   child:

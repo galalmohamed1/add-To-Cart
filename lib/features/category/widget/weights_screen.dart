@@ -3,9 +3,8 @@ import 'package:add_to_cart/features/category/data/weight_data.dart';
 import 'package:flutter/material.dart';
 
 class WeightsScreen extends StatefulWidget {
-  final int index;
   final WeightData weight;
-  const WeightsScreen({super.key, required this.weight, required this.index});
+  const WeightsScreen({super.key, required this.weight});
 
   @override
   State<WeightsScreen> createState() => _WeightsScreenState();
@@ -25,11 +24,11 @@ class _WeightsScreenState extends State<WeightsScreen> {
             color: ColorsApp.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(
+              const BoxShadow(
                 color: ColorsApp.borderColor,
                 spreadRadius: 2,
                 blurRadius: 5,
-                offset: const Offset(0, 1),
+                offset: Offset(0, 1),
               ),
             ],
           ),
@@ -39,7 +38,7 @@ class _WeightsScreenState extends State<WeightsScreen> {
               children: [
                 Text(
                   widget.weight.name??"",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                     color: ColorsApp.textColor,
@@ -47,7 +46,7 @@ class _WeightsScreenState extends State<WeightsScreen> {
                 ),
                 Text(
                   (widget.weight.price??"0").toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 11,
                     fontWeight: FontWeight.w500,
                     color: ColorsApp.textColor,
@@ -55,7 +54,7 @@ class _WeightsScreenState extends State<WeightsScreen> {
                 ),
                 GestureDetector(
                   onTap: () => setState(() {
-                    isSelected = widget.index;
+                    widget.weight.check=!widget.weight.check;
                   }),
                   child: Container(
                     width: 24,
@@ -64,16 +63,16 @@ class _WeightsScreenState extends State<WeightsScreen> {
                       shape: BoxShape.circle,
                       border: Border.all(color: ColorsApp.black, width: 2),
                     ),
-                    child: isSelected == widget.index
+                    child: widget.weight.check
                         ? Center(
                             child: Container(
                               width: double.infinity,
                               height: double.infinity,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: ColorsApp.primaryColor,
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.check,
                                 color: Colors.white,
                                 size: 16,
@@ -83,7 +82,7 @@ class _WeightsScreenState extends State<WeightsScreen> {
                         : Container(
                               width: double.infinity,
                               height: double.infinity,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Colors.transparent,
                               ),

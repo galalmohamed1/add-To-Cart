@@ -7,30 +7,24 @@ import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dar
 import 'package:flutter/material.dart';
 
 class ShppingCartWidget extends StatefulWidget {
-  final CartItem? prodect; 
-  const ShppingCartWidget({super.key,  this.prodect,});
+  final CartItem? prodect;
+  const ShppingCartWidget({super.key, this.prodect});
 
   @override
   State<ShppingCartWidget> createState() => _ShppingCartWidgetState();
 }
 
 class _ShppingCartWidgetState extends State<ShppingCartWidget> {
-  int count=0;
+  int count = 0;
   @override
   Widget build(BuildContext context) {
+    // print(widget.prodect?.product.name);
     return Container(
-      height:170 ,
+      height: 170,
       width: 383,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 4,
-            offset: Offset(0, 4),
-            spreadRadius: 0,
-            color: ColorsApp.black.withOpacity(0.2),
-          ),
-        ],
+        boxShadow: [BoxShadow(blurRadius: 4, offset: const Offset(0, 4), spreadRadius: 0, color: ColorsApp.black.withOpacity(0.2))],
         color: ColorsApp.white,
       ),
       child: Row(
@@ -38,111 +32,72 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
           Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
                 child: SizedBox(
                   width: 138,
                   height: 138,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: NetworkImage(widget.prodect?.product.image ?? ''),
-                        fit: BoxFit.cover,
-                        )
-                  )),
+                      
+                      image: DecorationImage(image: NetworkImage(widget.prodect?.image??""), fit: BoxFit.cover),
+                    ),
+                  ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 25.0,horizontal: 15),
+                padding: const EdgeInsets.symmetric(vertical: 25.0, horizontal: 15),
                 child: GestureDetector(
-                  onTap: () {
-                    
-                  },
+                  onTap: () {},
                   child: Container(
                     height: 24,
                     width: 24,
-                    decoration: BoxDecoration(
-                      image:DecorationImage(image: AssetImage(Assets.assetsDelete)) ,
-                    ),
-                    
+                    decoration: const BoxDecoration(image: DecorationImage(image: AssetImage(Assets.assetsDelete))),
                   ),
                 ),
               ),
             ],
           ),
-          SizedBox(width: 7,),
+          const SizedBox(width: 7),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                SizedBox(height: 16,),
+                const SizedBox(height: 16),
                 Text(
-                  widget.prodect?.product.name ?? '',
+                  widget.prodect!.name,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w700),
                 ),
                 Row(
                   children: [
+                    const Text("Weight:", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                    const SizedBox(width: 5),
                     Text(
-                      "Weight:",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Text(
-                      widget.prodect?.weight?.name?? '',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: ColorsApp.grey
-                      ),
+                      widget.prodect!.selectedWeight.name ?? '',
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: ColorsApp.grey),
                     ),
                   ],
                 ),
                 Row(
                   children: [
+                    const Text("Salads:", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                    const SizedBox(width: 5),
                     Text(
-                      "Salads:",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Text(
-                      (widget.prodect?.additions).toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: ColorsApp.grey
-                      ),
+                      (widget.prodect!.selectedAdditions).toString(),
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: ColorsApp.grey),
                     ),
                   ],
                 ),
-                Row(
+                 Row(
                   children: [
+                    const Text("Extras:", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                    const SizedBox(width: 5),
                     Text(
-                      "Extras:",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SizedBox(width: 5,),
-                    Text(
-                      "Sesame Paste Salad",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: ColorsApp.grey
-                      ),
+                      (widget.prodect!.selectedWeight.name).toString(),
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: ColorsApp.grey),
                     ),
                   ],
                 ),
@@ -150,51 +105,50 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      "1263 EGP",
-                      style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                            color: ColorsApp.black
-                          ),
-                      ),
-                      SizedBox(width: 20,),
-                      SizedBox(
-                        width: 85,
-                        height: 32,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            GestureDetector(
-                              // onTap: () => _showButtonPressed(context, widget.prodect!,),
-                              child:SizedBox(
-                                height: 32,
-                                width: 32,
-                                child: DecoratedBox(decoration: BoxDecoration(
-                                image: DecorationImage(image: AssetImage(Assets.assetsCreate),),
-                              )),),
+                     Text(
+                      (widget.prodect!.selectedWeight.price).toString(),
+                      style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: ColorsApp.black),
+                    ),
+                    const SizedBox(width: 20),
+                    SizedBox(
+                      width: 85,
+                      height: 32,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          GestureDetector(
+                            // onTap: () => _showButtonPressed(context, widget.prodect!,),
+                            child: const SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(image: DecorationImage(image: AssetImage(Assets.assetsCreate))),
+                              ),
                             ),
-                            GestureDetector(
-                              onTap: () => _showButtonPressedChatMessage(context),
-                              child: SizedBox(
-                                height: 32,
-                                width: 32,
-                                child:DecoratedBox(
-                                  decoration:BoxDecoration(
+                          ),
+                          GestureDetector(
+                            onTap: () => _showButtonPressedChatMessage(context),
+                            child: const SizedBox(
+                              height: 32,
+                              width: 32,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
                                   // color: ColorsApp.primaryColor,
-                                image: DecorationImage(image: AssetImage(Assets.assetsChatMessage),),
-                              )),),
-                            )
-                          ],
-                        ),
-                      )
+                                  image: DecorationImage(image: AssetImage(Assets.assetsChatMessage)),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 7.0,right: 8.0,bottom: 36,top: 36),
+            padding: const EdgeInsets.only(left: 7.0, right: 8.0, bottom: 36, top: 36),
             child: SizedBox(
               width: 25,
               height: 99,
@@ -203,35 +157,25 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                   Container(
                     width: 25,
                     height: 25,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffFE962D),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    decoration: BoxDecoration(color: const Color(0xffFE962D), borderRadius: BorderRadius.circular(10)),
                     child: Center(
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                          count++;
+                            count++;
                           });
                         },
-                        icon: const Icon(Icons.add, color: Colors.white,size: 10,),
+                        icon: const Icon(Icons.add, color: Colors.white, size: 10),
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Text(count.toString(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                  ),),
-                  Spacer(),
+                  const Spacer(),
+                  Text(count.toString(), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w700)),
+                  const Spacer(),
                   Container(
                     width: 25,
                     height: 25,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffFE962D),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                    decoration: BoxDecoration(color: const Color(0xffFE962D), borderRadius: BorderRadius.circular(10)),
                     child: IconButton(
                       onPressed: () {
                         setState(() {
@@ -240,7 +184,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                           }
                         });
                       },
-                      icon: const Icon(Icons.remove, color: Colors.white, size: 10,),
+                      icon: const Icon(Icons.remove, color: Colors.white, size: 10),
                     ),
                   ),
                 ],
@@ -257,20 +201,21 @@ void _showButtonPressedChatMessage(BuildContext context) {
   showModalBottomSheet(
     backgroundColor: ColorsApp.white,
     context: context,
-    sheetAnimationStyle: AnimationStyle(duration: Duration(milliseconds: 1000),),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-    ),
+    sheetAnimationStyle: const AnimationStyle(duration: Duration(milliseconds: 1000)),
+    shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
     isScrollControlled: true,
-    
-    builder: (context) => BottomSheetChatMessage(),
+
+    builder: (context) => const BottomSheetChatMessage(),
   );
 }
 
-void _showButtonPressed(BuildContext context,ProductModel argument,int index) {
+// ignore: unused_element
+void _showButtonPressed(BuildContext context, ProductModel argument, int id) {
   showModalBottomSheet(
     backgroundColor: ColorsApp.white,
     context: context,
-    builder: (context) => SingleChildScrollView(child: Bottomsheet(product: argument,index: index,)),
+    builder: (context) => SingleChildScrollView(
+      child: Bottomsheet(product: argument, id: id),
+    ),
   );
 }

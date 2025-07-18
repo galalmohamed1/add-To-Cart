@@ -1,8 +1,8 @@
+import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/addation_data_model.dart';
 import 'package:add_to_cart/features/category/data/cart_item_data.dart';
 import 'package:add_to_cart/features/category/data/extras_data_model.dart';
 import 'package:add_to_cart/features/category/data/product_data_model.dart';
-import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/weight_data.dart';
 import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_state.dart';
@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Bottomsheet extends StatefulWidget {
-  final int index;
   final ProductModel product;
-  const Bottomsheet({super.key, required this.product, required this.index});
+  final int id;
+  const Bottomsheet({super.key, required this.product, required this.id});
 
   @override
   State<Bottomsheet> createState() => _BottomsheetState();
@@ -24,25 +24,27 @@ class Bottomsheet extends StatefulWidget {
 class _BottomsheetState extends State<Bottomsheet> {
   int count = 1;
   int isSelected = -1;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<HomeCubit>().getProductData(widget.id);
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {
-        if (state is HomeSuccessState) {
-          print('object');
-        }
-      },
-      buildWhen: (previous, current) =>
-          current is HomeLoadingState ||
-          current is HomeErrorState ||
-          current is HomeSuccessWeightState ||
-          current is HomeSuccessSaladsState ||
-          current is HomeSuccessExtraState,
+    final cubit = context.read<HomeCubit>();
+    return BlocBuilder<HomeCubit, HomeStates>(
+      buildWhen: (previous, current) => current is HomeProductState,
       builder: (context, state) {
-        if (state is HomeLoadingState) {
-          return Center(child: CircularProgressIndicator());
-        } else if (state is HomeErrorState) {
-          return Text(state.error.message ?? '');
+        if (state is! HomeProductState) return const SizedBox();
+        if (state.state == ProductState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.state == ProductState.error) {
+          return Text(state.errorMessage ?? '');
         } else {
           return SingleChildScrollView(
             child: Column(
@@ -56,7 +58,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                     icon: const Icon(Icons.close, color: Colors.black),
                   ),
                 ),
-                SizedBox(height: 21),
+                const SizedBox(height: 21),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Container(
@@ -84,7 +86,9 @@ class _BottomsheetState extends State<Bottomsheet> {
                             child: DecoratedBox(
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(widget.product.image ?? ""),
+                                  image: NetworkImage(
+                                    widget.product.image ?? "",
+                                  ),
                                   onError: (exception, stackTrace) {},
                                   fit: BoxFit.cover,
                                 ),
@@ -104,13 +108,13 @@ class _BottomsheetState extends State<Bottomsheet> {
                               child: Text(
                                 widget.product.name ?? "",
                                 // 'Grilled Steak, with Boiled\n Basmati Rice And Salad',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 12,
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                             ),
-                            SizedBox(height: 18),
+                            const SizedBox(height: 18),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -120,7 +124,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                                       (widget.product.priceBeforeDiscount ?? "")
                                           .toString(),
                                       // '178 EGP',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         decoration: TextDecoration.lineThrough,
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
@@ -130,7 +134,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                                     Text(
                                       (widget.product.price ?? 0).toString(),
                                       // '125 EGP',
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w700,
                                         color: Color(0xffFE962D),
@@ -138,7 +142,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 51),
+                                const SizedBox(width: 51),
                                 SizedBox(
                                   width: 135,
                                   height: 41,
@@ -149,7 +153,9 @@ class _BottomsheetState extends State<Bottomsheet> {
                                         height: 32,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffFE962D),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                         ),
                                         child: IconButton(
                                           onPressed: () {
@@ -166,21 +172,23 @@ class _BottomsheetState extends State<Bottomsheet> {
                                           ),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Text(
                                         count.toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       Container(
                                         width: 32,
                                         height: 32,
                                         decoration: BoxDecoration(
                                           color: const Color(0xffFE962D),
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                         ),
                                         child: IconButton(
                                           onPressed: () {
@@ -198,7 +206,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(width: 9.15),
+                                const SizedBox(width: 9.15),
                               ],
                             ),
                           ],
@@ -207,37 +215,40 @@ class _BottomsheetState extends State<Bottomsheet> {
                     ),
                   ),
                 ),
-                SizedBox(height: 17.61),
-                WeightsWidget(weights: state is HomeSuccessWeightState ? state.weights : []),
-                SizedBox(height: 23),
-                AdditionWidget(
-                  salads: state is HomeSuccessSaladsState ? state.salads : [],
-                ),
-                SizedBox(height: 33),
-                ExtrasWidget(
-                  extras: state is HomeSuccessExtraState ? state.extras : [],
-                ),
+                const SizedBox(height: 17.61),
+                WeightsWidget(weights: state.weights),
+                const SizedBox(height: 23),
+                AdditionWidget(salads: state.additions),
+                const SizedBox(height: 33),
+                ExtrasWidget(extras: state.extras),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      int quantity = 1; // example quantity, replace with actual state
-                    WeightData? selectedWeight; // assign based on user selection
-                    Map<AddationDataModel, int> selectedAdditions = {}; // assign based on user selection
-                    List<ExtrasDataModel> selectedExtras = []; // assign based on user selection
+                      final selectedWeight = cubit.weights.firstWhere(
+                        (e) => e.check == true,
+                        orElse: () =>
+                            cubit.weights.first,
+                      );
 
-                    final cartItem = CartItem(
-                      product: widget.product,
-                      quantity: quantity,
-                      weight: selectedWeight,
-                      additions: selectedAdditions,
-                      extras: selectedExtras,
-                    );
+                      final selectedAdditions = cubit.salads
+                          .where((e) => e.count! > 0)
+                          .toList();
 
-                    context.read<HomeCubit>().addToCart(cartItem);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Added to cart')),
-                    );
+                      final selectedExtras = cubit.extras
+                          .where((e) => e.check == true)
+                          .toList();
+                          
+                      final cartItem = CartItem(
+                        id: widget.product.id,
+                        name: widget.product.name ?? '',
+                        quantity: widget.product.price ?? 0,
+                        image: widget.product.image,
+                        selectedWeight: selectedWeight,
+                        selectedAdditions: selectedAdditions,
+                        selectedExtras: selectedExtras,
+                      );
+                      context.read<HomeCubit>().addToCart(cartItem);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsApp.primaryColor,
@@ -249,9 +260,9 @@ class _BottomsheetState extends State<Bottomsheet> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text(
                           'Add To Cart',
                           style: TextStyle(
@@ -282,3 +293,15 @@ class _BottomsheetState extends State<Bottomsheet> {
     );
   }
 }
+
+
+
+                      // final cartItem = CartItem(
+                      //   product: widget.product,
+                      //   weight: state.weights,
+                      // //   additions: selectedAdditions,
+                      // //   extras: state.extras.,
+                      //   price: count * (widget.product.price ?? 0),
+                      // );
+                      // context.read<HomeCubit>().addToCart(cartItem);
+                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart')));

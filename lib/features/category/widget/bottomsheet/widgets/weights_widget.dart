@@ -1,11 +1,7 @@
 import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/weight_data.dart';
-import 'package:add_to_cart/features/category/logic/home_cubit.dart';
-import 'package:add_to_cart/features/category/logic/home_state.dart';
 import 'package:add_to_cart/features/category/widget/weights_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WeightsWidget extends StatelessWidget {
   final List<WeightData> weights;
@@ -24,8 +20,8 @@ class WeightsWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
               "Weights",
               style: TextStyle(
@@ -35,18 +31,18 @@ class WeightsWidget extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           GridView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 4,
             ),
             itemCount: weights.length,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: WeightsScreen(index: index, weight: weights[index]),
+              child: WeightsScreen( weight: weights[index]),
             ),
           ),
         ],

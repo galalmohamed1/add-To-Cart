@@ -40,10 +40,10 @@ class _SearchWidgetState extends State<SearchWidget> {
                               color: Colors.black.withOpacity(0.2), 
                               spreadRadius: 2, 
                               blurRadius: 5, 
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                           ),
                       ],
-                      borderRadius: BorderRadius.all(Radius.circular(12))
+                      borderRadius: const BorderRadius.all(Radius.circular(12))
                       ),
                       child: MainTextField(
                         controller: searchController,
@@ -51,7 +51,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                         prefix: const Icon(Icons.search),
                         suffix: Container(
                           width: 28,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             image:DecorationImage(
                               image: AssetImage("assets/images/a611fac2d8e2fc4f90c6091e9414715e4b1fda8a.png"),) ,
                           ),
@@ -64,17 +64,17 @@ class _SearchWidgetState extends State<SearchWidget> {
                   child: MainButton(
                     width: 40,
                     height: 40,
-                    borderRadius: 8,                    
+                    borderRadius: 8,
+                    bgColor: const Color(0xffFE962D),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    ontap: () => {
+                      searchController.clear()
+                    },                    
                     child: SvgPicture.asset(
                       Assets.assetsSvgFilterEditSvgrepoCom1,
                       width: 28,
                       height: 28,
                     ),
-                    bgColor: Color(0xffFE962D),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    ontap: () => {
-                      searchController.clear()
-                    },
                   ),
                 ),
               ],

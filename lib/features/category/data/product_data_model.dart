@@ -7,7 +7,6 @@ class ProductModel {
   double? price;
   double? priceBeforeDiscount;
   int? points;
-
   ProductModel(
       {this.id,
       this.name,

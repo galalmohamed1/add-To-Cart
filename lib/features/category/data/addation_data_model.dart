@@ -3,8 +3,9 @@ class AddationDataModel {
   String? name;
   double? price;
   String? image;
+  num? count=0;
 
-  AddationDataModel({this.id, this.name, this.price, this.image});
+  AddationDataModel({this.id, this.name, this.price, this.image, this.count =0});
 
   AddationDataModel.fromJson({required Map<String, dynamic> json}) {
     id = json['id'];

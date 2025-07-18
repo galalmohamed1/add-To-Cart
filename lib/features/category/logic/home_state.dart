@@ -10,30 +10,30 @@ class HomeInitialState extends HomeStates {}
 
 class HomeLoadingState extends HomeStates {}
 
+
 class HomeSuccessState extends HomeStates {
   List<ProductModel> products;
   HomeSuccessState(this.products);
 }
 
-class HomeSuccessExtraState extends HomeStates {
-  List<ExtrasDataModel> extras;
-  HomeSuccessExtraState(this.extras);
-}
-
-class HomeSuccessWeightState extends HomeStates {
-  List<WeightData> weights;
-  HomeSuccessWeightState(this.weights);
-}
-
-class HomeSuccessSaladsState extends HomeStates {
-  List<AddationDataModel> salads;
-  HomeSuccessSaladsState(this.salads);
-}
-class CartUpdatedState extends HomeStates {
-  CartUpdatedState();
-}
-
 class HomeErrorState extends HomeStates {
-  final ApiErrorModel error;
-  HomeErrorState(this.error);
+  ApiErrorModel message;
+  HomeErrorState(this.message);
+}
+
+enum ProductState { initial, loading, success, error }
+
+class HomeProductState extends HomeStates {
+  final ProductState state;
+  final String? errorMessage;
+  final ProductModel product;
+  final List<WeightData> weights;
+  final List<AddationDataModel> additions;
+  final List<ExtrasDataModel> extras;
+
+  HomeProductState({this.errorMessage, required this.state, required this.product, required this.weights, required this.additions, required this.extras});
+}
+
+class AddToCartState extends HomeStates{
+ AddToCartState();
 }

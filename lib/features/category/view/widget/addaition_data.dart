@@ -1,4 +1,3 @@
-import 'package:add_to_cart/core/assets.dart';
 import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/addation_data_model.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ class AddaitionScreen extends StatefulWidget {
 }
 
 class _AddaitionScreenState extends State<AddaitionScreen> {
-  int count =0;
+  // int count =0;
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
             color: Colors.black.withOpacity(0.2),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, 4),
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -57,16 +56,16 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
               children: [
                 Text(
                   widget.add.name??"",
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children:[
                     Text(
                       (widget.add.price??"0").toString(),
-                      style: TextStyle(fontSize: 14, color: Colors.black),
+                      style: const TextStyle(fontSize: 14, color: Colors.black),
                     ),
-                    SizedBox(width: 109,),
-                    Container(
+                    const SizedBox(width: 109,),
+                    SizedBox(
                       width: 112,
                       height: 34,
                       // color: Colors.amber,
@@ -80,22 +79,22 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: IconButton(
-                              icon: Icon(Icons.remove, color: Colors.white,size: 16,),
+                              icon: const Icon(Icons.remove, color: Colors.white,size: 16,),
                               onPressed: () {
                                 setState(() {
-                                  if (count > 0) {
-                                    count--;
+                                  if (widget.add.count! > 0) {
+                                    widget.add.count=widget.add.count! -1;
                                   }
                                 });
                               },
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
-                            count.toString(),
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            widget.add.count.toString(),
+                            style: const TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                           Spacer(),
+                           const Spacer(),
                           Container(
                             width: 32,
                             height: 32,
@@ -104,10 +103,10 @@ class _AddaitionScreenState extends State<AddaitionScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: IconButton(
-                              icon: Icon(Icons.add, color: Colors.white,size: 16,),
+                              icon: const Icon(Icons.add, color: Colors.white,size: 16,),
                               onPressed: () {
                                 setState(() {
-                                  count++;
+                                  widget.add.count=widget.add.count!+1;
                                 });
                               },
                             ),

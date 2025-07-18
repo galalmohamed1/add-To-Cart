@@ -1,12 +1,11 @@
 import 'package:add_to_cart/core/assets.dart';
 import 'package:add_to_cart/core/color/colors.dart';
-import 'package:add_to_cart/features/category/data/product_data_model.dart';
-import 'package:add_to_cart/features/category/view/shopping/widget/bottom_sheet_chat_message.dart';
+import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/view/shopping/widget/shpping_cart_widget.dart';
 import 'package:add_to_cart/features/category/widget/main_text_field.dart';
 import 'package:add_to_cart/main.dart';
 import 'package:flutter/material.dart';
-import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ShoppingScreen extends StatefulWidget {
   const ShoppingScreen({super.key});
@@ -18,6 +17,7 @@ class ShoppingScreen extends StatefulWidget {
 class _ShoppingScreenState extends State<ShoppingScreen> {
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<HomeCubit>();
     return AnnotatedRegion<SystemUiOverlayStyle>(
   value: SystemUiOverlayStyle.dark,
     child: Scaffold(
@@ -44,14 +44,14 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                             spreadRadius:0,
                             blurRadius: 4.0,
                             color: ColorsApp.black.withOpacity(0.2),
-                            offset: Offset(0, 4),
+                            offset: const Offset(0, 4),
                           )
                         ]
                       ),
-                      child: Icon(Icons.arrow_back_ios_new_rounded,color: ColorsApp.black,),
+                      child: const Icon(Icons.arrow_back_ios_new_rounded,color: ColorsApp.black,),
                       ),),
                 const Spacer(),
-                Text("Cart Screen",maxLines: 2,
+                const Text("Cart Screen",maxLines: 2,
                       style: TextStyle(
                         color: ColorsApp.black2,
                         fontSize: 20,
@@ -75,11 +75,11 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                               spreadRadius:0,
                               blurRadius: 4.0,
                               color: ColorsApp.black.withOpacity(0.2),
-                              offset: Offset(0, 4),
+                              offset: const Offset(0, 4),
                             )
                           ]
                         ),
-                        child:Image(image: AssetImage( Assets.assetsMenu,)),
+                        child:const Image(image: AssetImage( Assets.assetsMenu,)),
                       ),
                     ),
 
@@ -88,9 +88,9 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               ),
             ),
          Expanded(child: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (context, index) =>Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 30),
+          itemCount: cubit.cart.length,
+          itemBuilder: (context, index) =>const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0,vertical: 30),
             child: ShppingCartWidget(),),
           ) ,
           ),
@@ -105,10 +105,10 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 ),),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
-                  children: const [
+                  children: [
                     Text(
                       'Checkout',
                       style: TextStyle(
@@ -140,9 +140,9 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 ),),
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       'Delete All',
                       style: TextStyle(
@@ -155,7 +155,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                ),
            ),
         ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
 
         ],
         ),

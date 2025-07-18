@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:add_to_cart/features/category/view/category_screen.dart';
 import 'package:add_to_cart/features/category/view/shopping/shopping_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'app_routes_name.dart';
@@ -18,7 +17,7 @@ abstract class AppRoutes {
 
       case PagesRouteName.ShoppingScreen:
         return MaterialPageRoute(
-          builder: (context) =>  ShoppingScreen(),
+          builder: (context) =>  const ShoppingScreen(),
           settings: settings,
         );
 
