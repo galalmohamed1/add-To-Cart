@@ -1,9 +1,7 @@
 import 'package:add_to_cart/core/color/colors.dart';
-import 'package:add_to_cart/features/category/data/addation_data_model.dart';
 import 'package:add_to_cart/features/category/data/cart_item_data.dart';
-import 'package:add_to_cart/features/category/data/extras_data_model.dart';
 import 'package:add_to_cart/features/category/data/product_data_model.dart';
-import 'package:add_to_cart/features/category/data/weight_data.dart';
+import 'package:add_to_cart/features/category/logic/cart_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_state.dart';
 import 'package:add_to_cart/features/category/widget/bottomsheet/widgets/addition_widget.dart';
@@ -15,7 +13,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Bottomsheet extends StatefulWidget {
   final ProductModel product;
   final int id;
-  const Bottomsheet({super.key, required this.product, required this.id});
+   const Bottomsheet({super.key, required this.product, required this.id});
 
   @override
   State<Bottomsheet> createState() => _BottomsheetState();
@@ -24,7 +22,8 @@ class Bottomsheet extends StatefulWidget {
 class _BottomsheetState extends State<Bottomsheet> {
   int count = 1;
   int isSelected = -1;
-
+  // double price = 0;
+  // late CartItem _item;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -36,6 +35,8 @@ class _BottomsheetState extends State<Bottomsheet> {
 
   @override
   Widget build(BuildContext context) {
+    // price = _item.selectedWeight.price! + _item.additionsPrice! + _item.extrasPrice!;
+    final price =context.read<CartCubit>();
     final cubit = context.read<HomeCubit>();
     return BlocBuilder<HomeCubit, HomeStates>(
       buildWhen: (previous, current) => current is HomeProductState,
@@ -227,28 +228,38 @@ class _BottomsheetState extends State<Bottomsheet> {
                     onPressed: () {
                       final selectedWeight = cubit.weights.firstWhere(
                         (e) => e.check == true,
-                        orElse: () =>
-                            cubit.weights.first,
+                        orElse: () => cubit.weights.first,
                       );
 
                       final selectedAdditions = cubit.salads
-                          .where((e) => e.count! > 0)
-                          .toList();
+                            .where((e) => e.count! > 0)
+                            .toList();
 
                       final selectedExtras = cubit.extras
                           .where((e) => e.check == true)
                           .toList();
-                          
+                      final totalSaladsPrice = cubit.salads
+                          .where((e) => e.count! > 0)
+                          .map((e) => e.price ?? 0)
+                          .fold<num>(0, (sum, price) => sum + price);
+                      final totalExtrasPrice = cubit.extras
+                          .where((e) => e.check== true)
+                          .map((e) => e.price ?? 0)
+                          .fold<num>(0, (sum, price) => sum + price);
+                      //  price= selectedWeight.price! + totalSaladsPrice + totalExtrasPrice;
                       final cartItem = CartItem(
+                        product: widget.product,
                         id: widget.product.id,
                         name: widget.product.name ?? '',
                         quantity: widget.product.price ?? 0,
                         image: widget.product.image,
                         selectedWeight: selectedWeight,
-                        selectedAdditions: selectedAdditions,
-                        selectedExtras: selectedExtras,
+                        selectedAdditions: selectedAdditions.length.toString(),
+                        selectedExtras: selectedExtras.length.toString(),
+                        additionsPrice:totalSaladsPrice,
+                        extrasPrice: totalExtrasPrice,
                       );
-                      context.read<HomeCubit>().addToCart(cartItem);
+                      context.read<CartCubit>().addItem(cartItem);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: ColorsApp.primaryColor,
@@ -260,7 +271,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: const Row(
+                    child:  const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
@@ -273,7 +284,7 @@ class _BottomsheetState extends State<Bottomsheet> {
                         ),
                         Spacer(),
                         Text(
-                          '1263 EGP',
+                          "2000EGP",
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -293,15 +304,3 @@ class _BottomsheetState extends State<Bottomsheet> {
     );
   }
 }
-
-
-
-                      // final cartItem = CartItem(
-                      //   product: widget.product,
-                      //   weight: state.weights,
-                      // //   additions: selectedAdditions,
-                      // //   extras: state.extras.,
-                      //   price: count * (widget.product.price ?? 0),
-                      // );
-                      // context.read<HomeCubit>().addToCart(cartItem);
-                      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to cart')));

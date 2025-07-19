@@ -1,5 +1,6 @@
 import 'package:add_to_cart/core/assets.dart';
 import 'package:add_to_cart/core/color/colors.dart';
+import 'package:add_to_cart/features/category/logic/cart_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/view/shopping/widget/shpping_cart_widget.dart';
 import 'package:add_to_cart/features/category/widget/main_text_field.dart';
@@ -14,10 +15,12 @@ class ShoppingScreen extends StatefulWidget {
   State<ShoppingScreen> createState() => _ShoppingScreenState();
 }
 
+
 class _ShoppingScreenState extends State<ShoppingScreen> {
+  
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<HomeCubit>();
+    final cubit = context.read<CartCubit>();
     return AnnotatedRegion<SystemUiOverlayStyle>(
   value: SystemUiOverlayStyle.dark,
     child: Scaffold(
@@ -88,10 +91,10 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               ),
             ),
          Expanded(child: ListView.builder(
-          itemCount: cubit.cart.length,
-          itemBuilder: (context, index) =>const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24.0,vertical: 30),
-            child: ShppingCartWidget(),),
+          itemCount: cubit.cartItems.length,
+          itemBuilder: (context, index) =>Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 30),
+            child: ShppingCartWidget(items: cubit.cartItems[index],),),
           ) ,
           ),
           
@@ -133,7 +136,11 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
           Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+              context.read<CartCubit>().clearCart();
+              });
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: ColorsApp.BottonDeleteColor,
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),

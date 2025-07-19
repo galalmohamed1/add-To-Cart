@@ -1,5 +1,6 @@
 import 'package:add_to_cart/core/routes/app_routes.dart';
 import 'package:add_to_cart/core/routes/app_routes_name.dart';
+import 'package:add_to_cart/features/category/logic/cart_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,7 +25,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => HomeCubit()..getCategoriesData())],
+      providers: [
+        BlocProvider(create: (context) => HomeCubit()..getCategoriesData()),
+        BlocProvider(create: (context) => CartCubit()),
+        ],
       child: MaterialApp(
         title: 'Add to Cart Example',
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
