@@ -34,6 +34,6 @@ class HomeProductState extends HomeStates {
   HomeProductState({this.errorMessage, required this.state, required this.product, required this.weights, required this.additions, required this.extras});
 }
 
-class AddToCartState extends HomeStates{
- AddToCartState();
-}
+// class AddToCartState extends HomeStates{
+//  AddToCartState();
+// }

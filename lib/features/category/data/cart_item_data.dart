@@ -15,7 +15,7 @@ class CartItem {
 
   CartItem({
     this.additionsPrice,
-    this.extrasPrice, 
+    this.extrasPrice,
     this.product,
     this.id,
     required this.image,
@@ -26,5 +26,30 @@ class CartItem {
     required this.selectedExtras,
   });
 
-  
+  CartItem copyWith({
+    ProductModel? product,
+    int? id,
+    String? image,
+    String? name,
+    double? quantity,
+    WeightData? selectedWeight,
+    String? selectedAdditions,
+    String? selectedExtras,
+    num? extrasPrice,
+    num? additionsPrice,
+  }) {
+    return CartItem(
+      product: product ?? this.product,
+      id: id ?? this.id,
+      image: image ?? this.image,
+      name: name ?? this.name,
+      quantity: quantity ?? this.quantity,
+      selectedWeight: selectedWeight ?? this.selectedWeight,
+      selectedAdditions: selectedAdditions ?? this.selectedAdditions,
+      selectedExtras: selectedExtras ?? this.selectedExtras,
+      extrasPrice: extrasPrice ?? this.extrasPrice,
+      additionsPrice: additionsPrice ?? this.additionsPrice,
+    );
+  }
 }
+

@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 
 class ExtrasScreen extends StatefulWidget {
   final ExtrasDataModel extras;
-  const ExtrasScreen({super.key, required this.extras,});
+  const ExtrasScreen({super.key, required this.extras});
 
   @override
   State<ExtrasScreen> createState() => _ExtrasScreenState();
 }
 
 class _ExtrasScreenState extends State<ExtrasScreen> {
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,61 +33,63 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
             child: Text(
-              widget.extras.name??"",
+              widget.extras.name ?? "",
               // "Sesame Paste Salad",
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),),
+              style: const TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
           ),
           const Spacer(),
           Text(
-            (widget.extras.price??"0").toString(),
-            // "10 EGP",
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 12,
-            fontWeight: FontWeight.w700,
+            (widget.extras.price ?? "0").toString(),
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
           ),
-          ),
-          const SizedBox(width: 5,),
+          const SizedBox(width: 5),
           GestureDetector(
             onTap: () {
               setState(() {
-                widget.extras.check=!widget.extras.check;
+                widget.extras.check = !widget.extras.check;
               });
             },
             child: SizedBox(
-              child:widget.extras.check?Container(
-                width: 25,
-                height: 25,
-                decoration: BoxDecoration(
-                  // color: ColorsApp.primaryColor,
-                  borderRadius: BorderRadius.circular(4),
-                  color: ColorsApp.primaryColor,
-                  border: BoxBorder.all(
-                    color: ColorsApp.primaryColor,
-                    width:1.5,
+              child: widget.extras.check
+                  ? Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        // color: ColorsApp.primaryColor,
+                        borderRadius: BorderRadius.circular(4),
+                        color: ColorsApp.primaryColor,
+                        border: BoxBorder.all(
+                          color: ColorsApp.primaryColor,
+                          width: 1.5,
+                        ),
+                      ),
+                      child: const Icon(Icons.check, color: ColorsApp.white),
+                    )
+                  : Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        // color: ColorsApp.primaryColor,
+                        borderRadius: BorderRadius.circular(4),
+                        border: BoxBorder.all(
+                          color: ColorsApp.primaryColor,
+                          width: 1.5,
+                        ),
+                      ),
                     ),
-                ),
-                child: const Icon(Icons.check,color: ColorsApp.white,),
-              ):Container(
-                width: 25,
-                height: 25,
-                decoration: BoxDecoration(
-                  // color: ColorsApp.primaryColor,
-                  borderRadius: BorderRadius.circular(4),
-                  border: BoxBorder.all(
-                    color: ColorsApp.primaryColor,
-                    width:1.5,
-                    ),
-                )
-              )
             ),
           ),
-          const SizedBox(width: 5,),
-      ],
+          const SizedBox(width: 5),
+        ],
       ),
     );
   }

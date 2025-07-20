@@ -14,7 +14,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitialState());
   List<ProductModel> _prodects = [];
-  List<CartItem> cart = [];
+  // List<CartItem> cart = [];
   List<AddationDataModel> _salads = [];
 
   List<WeightData> _weights = [];
@@ -135,8 +135,8 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
 
-  void addToCart(CartItem item) {
-    cart.add(item);
-    emit(AddToCartState());
-  }
+  // void addToCart(CartItem item) {
+  //   cart.add(item);
+  //   emit(AddToCartState());
+  // }
 }

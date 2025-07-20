@@ -6,7 +6,7 @@ import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_state.dart';
 import 'package:add_to_cart/features/category/view/widget/product_screen.dart';
 import 'package:add_to_cart/features/category/view/widget/search_widget.dart';
-import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dart';
+import 'package:add_to_cart/features/category/view/bottomsheet/bottomsheet_screen.dart';
 import 'package:add_to_cart/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -3,8 +3,9 @@ import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/data/cart_item_data.dart';
 import 'package:add_to_cart/features/category/data/product_data_model.dart';
 import 'package:add_to_cart/features/category/logic/cart_cubit.dart';
+import 'package:add_to_cart/features/category/view/bottomsheet_update/bottomsheet_update_screen.dart';
 import 'package:add_to_cart/features/category/view/shopping/widget/bottom_sheet_chat_message.dart';
-import 'package:add_to_cart/features/category/widget/bottomsheet/bottomsheet.dart';
+import 'package:add_to_cart/features/category/view/bottomsheet/bottomsheet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -54,7 +55,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                       borderRadius: BorderRadius.circular(10),
 
                       image: DecorationImage(
-                        image: NetworkImage(widget.items?.image ?? ""),
+                        image: NetworkImage(widget.items.image ?? ""),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -70,7 +71,7 @@ class _ShppingCartWidgetState extends State<ShppingCartWidget> {
                   onTap: () {
                     setState(() {
                       context.read<CartCubit>().removeItem(
-                        widget.items.id ?? 0,
+                        widget.items.id!,
                       );
                     });
                   },
@@ -317,7 +318,7 @@ void _showButtonPressed(BuildContext context, ProductModel argument, int id) {
     backgroundColor: ColorsApp.white,
     context: context,
     builder: (context) => SingleChildScrollView(
-      child: Bottomsheet(product: argument, id: id),
+      child: BottomsheetUpdateScreen(product: argument, id: id),
     ),
   );
 }

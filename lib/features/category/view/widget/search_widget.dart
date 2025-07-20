@@ -1,6 +1,6 @@
 
-import 'package:add_to_cart/features/category/widget/main_button.dart';
-import 'package:add_to_cart/features/category/widget/main_text_field.dart';
+import 'package:add_to_cart/core/widget/main_button.dart';
+import 'package:add_to_cart/core/widget/main_text_field.dart';
 import 'package:add_to_cart/core/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

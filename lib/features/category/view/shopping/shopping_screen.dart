@@ -3,7 +3,7 @@ import 'package:add_to_cart/core/color/colors.dart';
 import 'package:add_to_cart/features/category/logic/cart_cubit.dart';
 import 'package:add_to_cart/features/category/logic/home_cubit.dart';
 import 'package:add_to_cart/features/category/view/shopping/widget/shpping_cart_widget.dart';
-import 'package:add_to_cart/features/category/widget/main_text_field.dart';
+import 'package:add_to_cart/core/widget/main_text_field.dart';
 import 'package:add_to_cart/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,11 +108,11 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
                 ),),
-                child: const Row(
+                child:  Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Text(
+                    const Text(
                       'Checkout',
                       style: TextStyle(
                         color: Colors.white,
@@ -120,10 +120,10 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                         fontSize: 18,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1263 EGP',
-                      style: TextStyle(
+                      '${cubit.calculateTotalPrice()}EGP',
+                      style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
